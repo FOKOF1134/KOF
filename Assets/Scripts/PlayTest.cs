@@ -8,19 +8,22 @@ using System;
 public class PlayTest : MonoBehaviour
 {
     public List<Sprite> test;
+    public float speed = 6f;
+    public float jumpForce = 11f;
 
     [SerializeField] private BaShenSO BaShenSO;
-
     private SpriteRenderer spriteRenderer;
     private Dictionary<ActionType, List<Sprite>> mp = new Dictionary<ActionType, List<Sprite>>();
     private ActionType currentAction = ActionType.idle;
-    private Rigidbody2D rigidbody;
-    private bool isJumping;
+    private Rigidbody2D rb;
+    private Collider2D coll;
+    private bool onGround;
 
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        rigidbody = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
+        coll = GetComponent<Collider2D>();
         Type t = BaShenSO.GetType();
         var idle = t.GetField("idle");
         var jump = t.GetField("jump");
@@ -38,24 +41,29 @@ public class PlayTest : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.D))
-        {
-            if (transform.localScale.x < 0)
+        if(onGround){
+            if (Input.GetKey(KeyCode.D))
+            {
+                if (transform.localScale.x < 0)
                 transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-            currentAction = ActionType.run;
-            Debug.Log(currentAction);
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            currentAction = ActionType.jump;
-            Debug.Log(currentAction);
-            //if(!isJumping) DoJump();
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            if (transform.localScale.x > 0)
-                transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
-            currentAction = ActionType.run;
+                currentAction = ActionType.run;
+                //Debug.Log(currentAction);
+                rb.velocity = new Vector2(speed, rb.velocity.y);
+            }
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                currentAction = ActionType.jump;
+                Debug.Log(currentAction);
+                rb.velocity = new Vector2(rb.velocity.x,jumpForce);
+                Debug.Log("11111111");
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                if (transform.localScale.x > 0)
+                    transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+                currentAction = ActionType.run;
+                rb.velocity = new Vector2(-speed, rb.velocity.y);
+            }
         }
     }
 
@@ -79,6 +87,25 @@ public class PlayTest : MonoBehaviour
         currentAction = ActionType.idle;
     }
 
+    void OnCollisionEnter2D(Collision2D collision){
+        isOnGround(collision,true);
+    }
+    void OnCollisionStay2D(Collision2D collision){
+        isOnGround(collision,true);
+    }
+    void OnCollisionExit2D(Collision2D collision){
+        isOnGround(collision,false);
+    }
+
+    void isOnGround(Collision2D coll,bool state){
+        if((coll.gameObject.layer == LayerMask.NameToLayer("ground"))&&state){
+            onGround = true;
+        }
+        else{
+            onGround = false;
+        } 
+    }
+    
     //private async void DoJump()
     //{
     //    isJumping = true;

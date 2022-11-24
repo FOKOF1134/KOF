@@ -1,0 +1,4 @@
+repository "KOF@xiaofei1024@cloud.cn"
+  path "/"
+    br "/main"
+    co "/main"

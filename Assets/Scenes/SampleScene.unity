@@ -303,7 +303,7 @@ GameObject:
   - component: {fileID: 1691809972}
   - component: {fileID: 1691809971}
   - component: {fileID: 1691809970}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -396,8 +396,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1691809969}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.18, y: -2.07, z: 0}
-  m_LocalScale: {x: 16.2362, y: 1, z: 1}
+  m_LocalPosition: {x: -0.04, y: -2.54, z: 0}
+  m_LocalScale: {x: 16.2362, y: 0.7914182, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -431,7 +431,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1896698233}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.25, y: 0.07, z: 0}
+  m_LocalPosition: {x: -3.1, y: 3.35, z: 0}
   m_LocalScale: {x: 3.058, y: 3.058, z: 3.058}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -451,6 +451,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   test: []
+  speed: 6
+  jumpForce: 11
   BaShenSO: {fileID: 11400000, guid: e42a196239a484520a2ca104aa03ebc9, type: 2}
 --- !u!212 &1896698236
 SpriteRenderer:
@@ -493,7 +495,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f005c3769313b4366a09caa1c32d5168, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1a542d355212f47d096b71811183243c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -519,7 +521,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -542,7 +544,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.72, y: 0.99}
+    oldSize: {x: 0.72, y: 1.02}
     newSize: {x: 0.74, y: 1.01}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
